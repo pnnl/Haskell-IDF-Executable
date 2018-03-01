@@ -1,0 +1,68 @@
+name:                idf
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/pnnl/Haskell-IDF-Executable
+license:             BSD3
+license-file:        LICENSE.txt
+author:              Mark Borkum
+maintainer:          mark.borkum@pnnl.gov
+copyright:           2018 Battelle Memorial Institute
+category:            Web
+build-type:          Simple
+extra-source-files:  README.md, WARRANTY.txt
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     IDF
+                     , IDF.Parser.ByteString.Char8
+                     , IDF.Types
+  build-depends:       base >= 4.7 && < 5
+                     , attoparsec
+                     , bytestring
+                     , containers
+                     , scientific
+                     , text
+                     , wl-pprint-text
+  default-language:    Haskell2010
+  ghc-options:         -Wall
+
+executable idf-graphviz
+  hs-source-dirs:      app
+  main-is:             GraphViz.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , attoparsec
+                     , bytestring
+                     , containers
+                     , fgl
+                     , graphviz
+                     , idf
+                     , text
+                     , wl-pprint-text
+  default-language:    Haskell2010
+
+executable idf-pprint
+  hs-source-dirs:      app
+  main-is:             PrettyPrint.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , attoparsec
+                     , bytestring
+                     , idf
+                     , wl-pprint-text
+  default-language:    Haskell2010
+
+test-suite idf-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , idf
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/pnnl/Haskell-IDF-Executable
